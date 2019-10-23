@@ -1,33 +1,33 @@
-const path = require('path');
+const path = require("path");
+const config = require("./webpack.config.js");
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const WriteFilePlugin = require('write-file-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const PreloadWebpackPlugin = require("preload-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+const WriteFilePlugin = require("write-file-webpack-plugin");
+
+const { staticFolderName } = config;
 
 module.exports = {
-  mode: 'development',
-  entry: {
-    main: './src/index.js',
-    vendor: './src/vendor.js'
-  },
+  mode: "development",
+  entry: [`./src/markup/${staticFolderName}/js/index.js`, `./src/markup/${staticFolderName}/styles/main.scss`],
   module: {
     rules: [
       {
         test: /\.txt$/,
-        use: 'raw-loader'
+        use: "raw-loader"
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[name].[ext]',
-              outputPath: 'images/',
-              publicPath: '/images/'
+              name: "[name].[ext]",
+              outputPath: `${staticFolderName}/img/`,
+              publicPath: `/${staticFolderName}/img/`
             }
           }
         ]
@@ -36,11 +36,11 @@ module.exports = {
         test: /\.(woff|woff2|ttf|otf)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-              publicPath: 'fonts/'
+              name: "[name].[ext]",
+              outputPath: `fonts/`,
+              publicPath: `/fonts/`
             }
           }
         ]
@@ -49,9 +49,9 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
+            presets: ["@babel/preset-env"]
           }
         }
       }
@@ -62,37 +62,27 @@ module.exports = {
     new WriteFilePlugin(),
     new CopyPlugin([
       {
-        from: path.resolve(__dirname, 'src', 'robots.txt'),
-        to: path.resolve(__dirname, 'dist', 'robots.txt')
+        from: "src/markup/static/fonts/",
+        to: "static/fonts"
+      },
+      {
+        from: "src/markup/static/img/",
+        to: "static/img"
       }
     ]),
     new HtmlWebpackPlugin({
-      title: 'tris-webpack-boilerplate',
-      filename: 'index.html',
-      template: './src/index.html',
-      inject: 'head'
-    }),
-    new HtmlWebpackPlugin({
-      title: 'tris-404-page',
-      filename: '404.html',
-      template: './src/404.html',
-      inject: 'head'
-    }),
-    new PreloadWebpackPlugin({
-      rel: 'preload',
-      as(entry) {
-        if (/\.(woff|woff2|ttf|otf)$/.test(entry)) return 'font';
-      },
-      fileWhitelist: [/\.(woff|woff2|ttf|otf)$/],
-      include: 'allAssets'
+      title: "tris-webpack-boilerplate",
+      filename: "index.html",
+      template: "./src/markup/pages/index.html",
+      inject: "head"
     }),
     new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'defer'
+      defaultAttribute: "defer"
     })
   ],
   externals: {
-    $: 'jquery',
-    jquery: 'jQuery',
-    'window.$': 'jquery'
+    $: "jquery",
+    jquery: "jQuery",
+    "window.$": "jquery"
   }
 };

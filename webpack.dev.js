@@ -1,49 +1,51 @@
-const path = require('path');
+const path = require("path");
+const config = require("./webpack.config.js");
 
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const merge = require("webpack-merge");
+const common = require("./webpack.common.js");
+
+const { staticFolderName } = config;
 
 module.exports = merge(common, {
-  mode: 'development',
-  devtool: 'inline-source-map',
+  mode: "development",
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
         test: /\.html$/,
         use: [
           {
-            loader: 'html-loader'
+            loader: "html-loader"
           }
         ]
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          'style-loader',
           {
-            loader: 'css-loader',
+            loader: "file-loader",
             options: {
-              sourceMap: true
+              name: "static/css/[name].css"
             }
           },
           {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true
-            }
+            loader: "extract-loader"
           },
           {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
+            loader: "css-loader?-url"
+          },
+          {
+            loader: "postcss-loader"
+          },
+          {
+            loader: "sass-loader"
           }
         ]
       }
     ]
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    filename: "static/js/[name].js",
+    path: path.resolve(__dirname, `dist`)
   }
 });
