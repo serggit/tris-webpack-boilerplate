@@ -25,7 +25,26 @@ body {
   font-display: fallback;
   font-style: normal;
   src: local("Libre Baskerville"), /* Checks if font is on users computer */ local("LibreBaskerville-Regular"),
-    /* Checks if font is on users computer */ url("/static/fonts/libre-baskerville-v5-latin-regular.woff2")
-      format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */ url("/static/fonts/libre-baskerville-v5-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+    /* Checks if font is on users computer */ url("../fonts/libre-baskerville-v5-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */ url("../fonts/libre-baskerville-v5-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+.bg-png-rel {
+  background: url("/static/img/general/profile-photo.png") no-repeat center center;
+  width: 100px;
+  height: 100px;
+}
+.bg-png-abs {
+  background: url("/static/img/general/profile-photo.png") no-repeat center center;
+  width: 100px;
+  height: 100px;
+}
+.bg-svg-rel {
+  background: url("/static/img/general/favicon.svg") no-repeat center center;
+  width: 100px;
+  height: 100px;
+}
+.bg-svg-abs {
+  background: url("/static/img/general/favicon.svg") no-repeat center center;
+  width: 100px;
+  height: 100px;
 }

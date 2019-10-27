@@ -29,17 +29,44 @@
 </head>
 
 <body>
-  123
+  Text
   <header>
-    <div class="wrapper">
+    @require('./components/test/index.html',)
+    @br(3)
+    \@nl()
+    @br()
+    @nl()
+    @div(3)
+    <!-- @header(1, 'Welcome') -->
 
-      <div class="nav">
-        <a class="logo-link" href="https://github.com/tr1s/tris-webpack-boilerplate" aria-label="Tristan's webpack boilerplate github repository.">
-          <img class="logo-img" src="/static/img/favicon.svg" alt="website logo" style="width: 30px;" />
-        </a>
-      </div>
-      <img src="/static/img/profile-photo.png" alt="" />
+    <h2>Images</h2>
+    <!-- <img class="logo-img" src="static/img/general/favicon.svg" alt="website logo" style="width: 30px;" />
+    <img class="logo-img" src="/static/img/general/favicon.svg" alt="website logo" style="width: 30px;" />
+    <img src="static/img/general/profile-photo.png" alt="" />
+    <img src="/static/img/general/profile-photo.png" alt="" />
+
+    
+
+    <h2>Div with styled background;</h2>
+    <div class="bg-png-rel"></div>
+    <div class="bg-png-abs"></div>
+    <div class="bg-svg-rel"></div>
+    <div class="bg-svg-abs"></div> -->
+
+    <h2>Div with inline background</h2>
+    <div style="display: flex;">
+      <div style="width: 99px; height: 100px; background: url('/static/img/general/favicon.svg') no-repeat center center;"></div>
+      <div style="width: 99px; height: 100px; background: url('/static/img/general/favicon.svg') no-repeat center center;"></div>
+      <div style="width: 99px; height: 100px; background: url(static/img/general/profile-photo.png) no-repeat center center;"></div>
+      <div style="width: 99px; height: 100px; background-image: url(https://placehold.it/128x128);"></div>
     </div>
+
+    <svg style="fill: red; width: 100px;">
+      <use xlink:href="/static/img/svg-sprite/sprite.svg#fire"></use>
+    </svg>
+    <svg style="fill: red; width: 100px;">
+      <use xlink:href="/static/img/svg-sprite/sprite.svg#heart-fill"></use>
+    </svg>
   </header>
 
 </body>

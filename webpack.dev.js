@@ -1,9 +1,7 @@
 const path = require("path");
 const config = require("./webpack.config.js");
-
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
-
 const { staticFolderName } = config;
 
 module.exports = merge(common, {
@@ -11,14 +9,6 @@ module.exports = merge(common, {
   devtool: "inline-source-map",
   module: {
     rules: [
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader"
-          }
-        ]
-      },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
@@ -32,7 +22,7 @@ module.exports = merge(common, {
             loader: "extract-loader"
           },
           {
-            loader: "css-loader?-url"
+            loader: "css-loader"
           },
           {
             loader: "postcss-loader"
