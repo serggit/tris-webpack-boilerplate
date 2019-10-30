@@ -1,6 +1,5 @@
 const path = require("path");
 const config = require("./webpack.config.js");
-
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const fs = require("fs");
@@ -26,12 +25,11 @@ const htmlPlugins = generateHtmlPlugins("./src/markup");
 
 module.exports = {
   mode: "development",
-  entry: [`./src/markup/${staticFolderName}/js/index.js`, `./src/markup/${staticFolderName}/styles/main.scss`],
+  entry: [`./src/markup/${staticFolderName}/styles/main.scss`, `./src/markup/${staticFolderName}/js/index.js`],
   module: {
     rules: [
       {
         test: /\.html$/,
-        //loader: "html-loader",
         loader: "underscore-template-loader"
       },
       {
@@ -107,10 +105,10 @@ module.exports = {
     new SpriteLoaderPlugin({
       plainSprite: true
     })
-  ]
-  // externals: {
-  //   $: "jquery",
-  //   jquery: "jQuery",
-  //   "window.$": "jquery"
-  // }
+  ],
+  externals: {
+    $: "jquery",
+    jquery: "jQuery",
+    "window.$": "jquery"
+  }
 };

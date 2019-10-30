@@ -1,3 +1,4 @@
 module.exports = {
-  staticFolderName: "static"
+  staticFolderName: "static",
+  APP: "APP"
 };

@@ -1,11 +1,9 @@
-require("offline-plugin/runtime").install();
+import "./common-scripts";
+import { menuToggle } from "../../components/menu/index";
 
-// import './fonts/libre-baskerville-v5-latin-regular.woff';
-// import './fonts/libre-baskerville-v5-latin-regular.woff2';
-
-// import './index.html';
-//import "../styles/index.scss";
-// import './scripts/script.js';
-
+// Importing all svg files from '../img/svg-sprite/' and make the external sprite
 const requireAll = r => r.keys().forEach(r);
 requireAll(require.context("../img/svg-sprite/", true, /\.svg$/));
+
+// Make APP.menuToggle() available from the console
+export { menuToggle };

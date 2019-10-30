@@ -6,7 +6,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const imageminMozjpeg = require("imagemin-mozjpeg");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-const OfflinePlugin = require("offline-plugin");
 
 module.exports = merge(common, {
   mode: "production",
@@ -82,11 +81,11 @@ module.exports = merge(common, {
         twitter: true,
         windows: true
       }
-    }),
-    new OfflinePlugin()
+    })
   ],
   output: {
     filename: "static/js/[name].js",
-    path: path.resolve(__dirname, "build")
+    path: path.resolve(__dirname, "build"),
+    library: "APP"
   }
 });

@@ -2,7 +2,6 @@ const path = require("path");
 const config = require("./webpack.config.js");
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
-const { staticFolderName } = config;
 
 module.exports = merge(common, {
   mode: "development",
@@ -36,6 +35,7 @@ module.exports = merge(common, {
   },
   output: {
     filename: "static/js/[name].js",
-    path: path.resolve(__dirname, `dist`)
+    path: path.resolve(__dirname, `dist`),
+    library: config.APP
   }
 });
